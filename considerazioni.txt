@@ -1,0 +1,16 @@
+DETECTION -> YOLOV8 solo bouding box
+SEGMENTATION -> YOLOV8 bounding box + segmentazione e colore cono
+
+La segmentation non è ancora supportata nella ZED2.
+
+La detection funziona bene: importante impostare model(...,'gpu')
+
+Capire se vogliamo anche la segmentazione (tanti modelli quanti la detection -> nano, small, medium, large, extra-large) -> i modelli pesano leggeremente di più.
+
+Per la segmentazione il dataset è sempre quello ma il numero di immagini è inferiore.
+
+
+
+
+##################### WARNING ##########################À
+CON YOLOV8 non è possibile avere due directory diverse per i dataset: ogni volta va cambiata in base a quello che si vede nello screenshoot.

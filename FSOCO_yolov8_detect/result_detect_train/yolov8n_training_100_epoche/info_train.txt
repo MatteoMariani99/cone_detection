@@ -1,0 +1,3 @@
+Batch_size automatico pari a 36
+Learning rate; 0.01
+Momentum: 0.9

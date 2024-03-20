@@ -1,0 +1,5 @@
+Se la GPU non viene riconosciuta (freeglut error) aggiungere:
+
+Option   "PrimaryGPU" "true"
+
+inside the outputclass of /usr/share/X11/xorg.conf.d/10-nvidia.conf

@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 10
+names: ['blue_cone', 'large_orange_cone', 'orange_cone', 'seg_blue_cone', 'seg_large_orange_cone', 'seg_orange_cone', 'seg_unknown_cone', 'seg_yellow_cone', 'unknown_cone', 'yellow_cone']
+
+roboflow:
+  workspace: fsoco-izpjc
+  project: fsoco_segmentation_verify
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/fsoco-izpjc/fsoco_segmentation_verify/dataset/3
