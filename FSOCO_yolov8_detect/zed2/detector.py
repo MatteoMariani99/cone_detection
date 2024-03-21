@@ -19,6 +19,8 @@ import cv_viewer.tracking_viewer as cv_viewer
 lock = Lock()
 run_signal = False
 exit_signal = False
+inference_time = []
+
 
 
 def xywh2abcd(xywh):
@@ -92,7 +94,7 @@ def torch_thread(img_size, conf_thres=0.8, iou_thres=0.47):
     # va copiato il modello migliore nel folder per poterlo riusare
     model = YOLO('best.pt','gpu')
 
-
+   
 
     while not exit_signal:
         if run_signal:
@@ -101,9 +103,19 @@ def torch_thread(img_size, conf_thres=0.8, iou_thres=0.47):
             # tolgo il canale a in modo da passare al modello un'immagine con 3 canali
             img = cv2.cvtColor(image_net, cv2.COLOR_RGBA2RGB)
             
+            
             #* PREDICT
             # https://docs.ultralytics.com/modes/predict/#video-suffixes
-            det = model.predict(img, save=False, imgsz=img_size, conf=conf_thres, iou=iou_thres)[0].cpu().numpy().boxes
+            result = model.predict(img, save=False, imgsz=img_size, conf=conf_thres, iou=iou_thres)
+            speed = result[0].speed
+            inference_time.append(speed['inference'])
+            print("Tempo medio di inferenza: ",sum(inference_time)/len(inference_time))
+            # for box in result[0].boxes:
+            #     class_id = int(box.cls)  # Get class ID
+            #     class_label = result[0].names[class_id]  # Get class label from class ID
+            #     class_label_list.insert(0,class_label)
+            
+            det = result[0].boxes
             
             # ritorna l'oggetto contenente le informazioni relative alla detection (bouinding box, classi, conf)
             detections = detections_to_custom_box(det)
@@ -114,6 +126,7 @@ def torch_thread(img_size, conf_thres=0.8, iou_thres=0.47):
 
 def main():
     global image_net, exit_signal, run_signal, detections
+    
 
     capture_thread = Thread(target=torch_thread, kwargs={'img_size': opt.img_size, "conf_thres": opt.conf_thres})
     capture_thread.start()
@@ -227,7 +240,8 @@ def main():
             lock.release()
             # salva tutti gli oggetti riconosciuti nel "oggetto python" objects
             zed.retrieve_objects(objects, obj_runtime_param)
-
+            
+            
             #* Display deep
             # Se si vuole ottenere la posizione di un punto in metri nell'immagine, basta calcolare le misure di depth
             # con la funzione retrieve_measure e poi estrapolarne il valore con get_value
@@ -268,7 +282,10 @@ def main():
             viewer.updateData(point_cloud_render, objects)
             # 2D rendering
             np.copyto(image_left_ocv, image_left.get_data())
-            cv_viewer.render_2D(image_left_ocv, image_scale, objects, obj_param.enable_tracking)
+            
+            
+            
+            cv_viewer.render_2D(image_left_ocv, image_scale, objects,obj_param.enable_tracking)
             global_image = cv2.hconcat([image_left_ocv, image_track_ocv])
             # Tracking view
             track_view_generator.generate_view(objects, cam_w_pose, image_track_ocv, objects.is_tracked)

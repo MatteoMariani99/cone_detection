@@ -14,3 +14,14 @@ Per la segmentazione il dataset è sempre quello ma il numero di immagini è inf
 
 ##################### WARNING ##########################À
 CON YOLOV8 non è possibile avere due directory diverse per i dataset: ogni volta va cambiata in base a quello che si vede nello screenshoot.
+
+
+
+########### DETECT ##############
+Per la parte di detection, è stato modiicato lo script tracking_viewer.py per poter stampare sugli oggetti i nomi delle classi.
+Tempo medio inferenza: circa 9.52 ms (modello extra large) (assestato)
+Tempo medio inferenza: circa 4.51 ms (modello nano) (assestato)
+
+
+########## SEGMENT ##########
+Tempo medio inferenza: 5.47 ms (modello nano) (non completamente assestato)

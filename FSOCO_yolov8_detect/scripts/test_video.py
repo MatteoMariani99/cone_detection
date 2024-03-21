@@ -31,7 +31,7 @@ model = YOLO('best.pt','gpu') # modello migliore durante il training
 #documentation: https://pypi.org/project/pafy/
 
 #cap = cv2.VideoCapture('myvideo.mp4')
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 
 # Loop through the video frames
 while cap.isOpened():
@@ -45,7 +45,6 @@ while cap.isOpened():
         
         # dentro in result [0] ci sono tante info tra cui i boxes
         # print(results[0].boxes)
-        # posso ora fare la differenza con i boxes che trovo nella cartella labels del train e vedere quanto sono diversi
 
         # Visualize the results on the frame
         annotated_frame = results[0].plot()

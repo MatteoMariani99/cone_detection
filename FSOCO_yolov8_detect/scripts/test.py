@@ -12,7 +12,7 @@ model = YOLO('best.pt','gpu')
 
 # testo un'immagine
 # per avere il real time del video (sorgente 2 era la zed2)
-results = model.predict(source=2, save=False, show = True, conf=0.8)
+results = model.predict(source=0, save=False, show = True, conf=0.8)
 
 
 # for result in results:

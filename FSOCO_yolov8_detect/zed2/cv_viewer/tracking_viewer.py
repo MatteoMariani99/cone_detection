@@ -29,10 +29,11 @@ def get_image_position(bounding_box_image, img_scale):
     return out_position
 
 
-def render_2D(left_display, img_scale, objects, is_tracking_on):
+def render_2D(left_display, img_scale, objects,is_tracking_on):
     overlay = left_display.copy()
 
     line_thickness = 2
+  
     for obj in objects.object_list:
         if render_object(obj, is_tracking_on):
             base_color = generate_color_id_u(obj.id)
@@ -62,13 +63,27 @@ def render_2D(left_display, img_scale, objects, is_tracking_on):
             # Display Object label as text
             position_image = get_image_position(obj.bounding_box_2d, img_scale)
             text_position = (int(position_image[0] - 20), int(position_image[1] - 12))
-            text = "class " + str(obj.raw_label)
+            
+            # eseguo questo controllo per stampare il nome della classe: si dovrebbe accedere da obj.label 
+            # ma stampa sempre unknown
+            if obj.raw_label == 0:
+                class_label = "blue_cone"
+            elif obj.raw_label == 1:
+                class_label = "large_orange_cone"
+            elif obj.raw_label == 2:
+                class_label = "orange_cone"
+            elif obj.raw_label == 3:
+                class_label = "unknown_cone"
+            elif obj.raw_label == 4:
+                class_label = "yellow_cone"
+                
+            text = "class " + class_label
             text_color = (255, 255, 255, 255)
             cv2.putText(left_display, text, text_position, cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.5, text_color, 1)
 
             # Diplay Object distance to camera as text
             if np.isfinite(obj.position[2]):
-                text = str(round(abs(obj.position[2]), 1)) + "M"
+                text = str(round(abs(obj.position[2]), 2)) + "M"
                 text_position = (int(position_image[0] - 20), int(position_image[1]))
                 cv2.putText(left_display, text, text_position, cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.5, text_color, 1)
 
