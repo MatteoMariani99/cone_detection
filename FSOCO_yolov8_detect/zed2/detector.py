@@ -83,7 +83,7 @@ def detections_to_custom_box(detections):
 
 
 def torch_thread(img_size, conf_thres=0.8, iou_thres=0.47):
-    global image_net, exit_signal, run_signal, detections
+    global image_net, exit_signal, run_signal, detections, coni
 
     print("Intializing Network...")
     
@@ -107,15 +107,39 @@ def torch_thread(img_size, conf_thres=0.8, iou_thres=0.47):
             #* PREDICT
             # https://docs.ultralytics.com/modes/predict/#video-suffixes
             result = model.predict(img, save=False, imgsz=img_size, conf=conf_thres, iou=iou_thres)
+            
             speed = result[0].speed
             inference_time.append(speed['inference'])
             print("Tempo medio di inferenza: ",sum(inference_time)/len(inference_time))
-            # for box in result[0].boxes:
+            
+            
+            det = result[0].cpu().numpy().boxes
+            
+            # con blu: sinistra
+            # coni gialli: destra
+
+            coni = {"Classe":[], "Bounding box":[], "Posizione in strada":[], "Posizione rispetto zed":[]}
+            
+            
+            for cls, index in zip(det.cls, range(len(det.cls))):
+                if int(cls)==0:
+                    posizione = "sinistra"
+                elif int(cls)==4:
+                    posizione = "destra"
+                else:
+                    posizione = "sconosciuta"
+                    
+                # per ogni classe salvo il risspettivo bounding box in un dizionario 
+                coni["Classe"].append(int(cls))
+                coni["Bounding box"].append(det.xywh[index].tolist())
+                coni["Posizione in strada"].append(posizione)
+                
+            
+            # for box in det:
             #     class_id = int(box.cls)  # Get class ID
             #     class_label = result[0].names[class_id]  # Get class label from class ID
             #     class_label_list.insert(0,class_label)
             
-            det = result[0].boxes
             
             # ritorna l'oggetto contenente le informazioni relative alla detection (bouinding box, classi, conf)
             detections = detections_to_custom_box(det)
@@ -283,7 +307,12 @@ def main():
             # 2D rendering
             np.copyto(image_left_ocv, image_left.get_data())
             
+            # aggiungo al dizionario la posizione in metri dei coni rispetto alla zed
+            for obj in objects.object_list:
+                if np.isfinite(obj.position[2]):
+                    coni["Posizione rispetto zed"].append([round(obj.position[0],3), round(obj.position[1],3)])
             
+            print("Info coni", coni)
             
             cv_viewer.render_2D(image_left_ocv, image_scale, objects,obj_param.enable_tracking)
             global_image = cv2.hconcat([image_left_ocv, image_track_ocv])
@@ -291,6 +320,12 @@ def main():
             track_view_generator.generate_view(objects, cam_w_pose, image_track_ocv, objects.is_tracked)
 
             cv2.imshow("ZED | 2D View and Birds View", global_image)
+            
+            # disegno i centroidi sui coni
+            if coni["Bounding box"] != []:
+                for box in coni["Bounding box"]:
+                    image = cv2.circle(global_image, (int(box[0]),int(box[1])), 1, (0,255,0), 10) 
+                    cv2.imshow("ZED | 2D View and Birds View", image)
             key = cv2.waitKey(10)
             if key == 27:
                 exit_signal = True

@@ -77,6 +77,7 @@ def render_2D(left_display, img_scale, objects,is_tracking_on):
             elif obj.raw_label == 4:
                 class_label = "yellow_cone"
                 
+            
             text = "class " + class_label
             text_color = (255, 255, 255, 255)
             cv2.putText(left_display, text, text_position, cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.5, text_color, 1)

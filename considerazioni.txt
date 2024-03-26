@@ -22,6 +22,19 @@ Per la parte di detection, è stato modiicato lo script tracking_viewer.py per p
 Tempo medio inferenza: circa 9.52 ms (modello extra large) (assestato)
 Tempo medio inferenza: circa 4.51 ms (modello nano) (assestato)
 
+Salvataggio info coni: 
+Classe [label
+Bounding box [pixel
+Posizione in strada [lato]
+Posizione rispetto zed [metri] -> frame mano destra Y up
+
+Quando trova i coni disegna il centroide sul cono.
+
+Trovare il punto medio non è difficile ma bisogna capire come gestire la detection di più coni (potrebbe essere sensato fare due dizionari di coni (giallo e blu) anzichè uno solo in modo da calcolare meglio i punti medi).
+
 
 ########## SEGMENT ##########
 Tempo medio inferenza: 5.47 ms (modello nano) (non completamente assestato)
+
+
+
