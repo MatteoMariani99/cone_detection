@@ -11,7 +11,7 @@ import torch
 #comet_ml.init(project_name="comet-example-yolov8-FSOCO")
 torch.cuda.set_device(0)
 
-yoloModel = "yolov8n.pt"
+yoloModel = "yolov8m.pt"
 
 # # selezionare il modello che si desidera allenare
 # user_input = int(input("Selezionare il modello da allenare: \n1: yolo nano\n2: yolo small\n3: yolo medium\n4: yolo large\n5: yolo extra-large\nScelta: "))

@@ -64,8 +64,6 @@ cap.release()
 cv2.destroyAllWindows()
 
 
-# Prova segmentazione: YOLOv8n-Seg modello
-
 # Box in termini di vertice in termini di:
 # [verticebassosx_x, verticebassosx_y, larghezza rettangolo, altezza rettangolo]
 # xywh: tensor([[ 189.1328,  524.6973,   69.0652,   80.9896],
