@@ -1,6 +1,9 @@
 # Cone detection tramite Yolov8
 La repository contiene tutto il necessario per eseguire il training e testing per il riconoscimento dei coni gialli e blu tramite la rete Yolov8.
 
+## Descrizione
+L'obiettivo è quello di allenare un modello della famiglia YOLO in modo da poterlo usare per l'identificazione coni all'interno dell'algoritmo Dagger. Il primo passo è stato quello di scegliere il dataset da utilizzare per l'allenamento: la scelta è ricaduta su [fsoco dataset](https://universe.roboflow.com/fmdv/fsoco-kxq3s), in quanto aveva già le immagini e le label predisposto per il training tramite rete yolo. Il modello scelto è **yolov8m.pt** ovvero il modello **medium** in modo da avere il giusto compromesso tra performance e dimensione della rete.
+
 ## Struttura
 La repository è così strutturata:
 - **FSOCO_yolov8_detect**: racchiude il training per l'identificazione dei coni con il dataset FSOCO e la rete yolov8;
