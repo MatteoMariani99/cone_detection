@@ -18,3 +18,26 @@ All'interno la repository presenta il file **data.yaml** che contiene tutte le i
 Nella cartella **script** sono presenti gli script python per il training e il testing del modello: i risultati vengono poi salvati, in maniera ordinata per modello e numero di epoche, all'interno della cartella **result_detect_train**.\
 Nella cartella **zed2** sono invece presenti gli script utili ad eseguire la cone detection direttamente con il modulo AI built-in della zed2 (è stato utilizzato come prova ma non fondamentale al fine del progetto).
 
+
+
+
+
+## Installazione
+In primis è necessario eseguire il clone della repository tramite il comando:
+```bash
+git clone https://github.com/MatteoMariani99/cone_detection.git
+```
+**ATTENZIONE**: non è necessario eseguire il clone di questa repository se già è stato eseguito quella relativa all'algoritmo Dagger. Il clone va eseguito se si vuole utilizzare solamente questa repository!
+
+Una volta eseguito il clone, aprire un terminale all'interno della repository tramite il comando - `CTRL + ALT + T` ed eseguire:
+
+```bash
+chmod +x install.sh
+```
+in modo da fornire i privilegi di esecuzione dello script.
+
+In seguito eseguire lo script tramite il comando:
+```bash
+bash install.sh
+```
+Verrà chiesto un nome a piacere per la creazione dell'ambiente conda: una volta fornito verranno installate tutte le dipendenze necessarie per la creazione di un ambiente completo di training: verrà inoltre eseguito il download del dataset e salvato in un'apposita directory.
