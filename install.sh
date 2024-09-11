@@ -13,12 +13,12 @@ fi
   conda env create -f cone_detection_yolov8.yml
   echo "Conda environment create complete"
   echo "Download dataset"
-  #wget -O fsoco_dataset https://universe.roboflow.com/ds/9lTdQO9Ufw?key=P2faPZEQ3e
+  wget -O fsoco_dataset https://universe.roboflow.com/ds/9lTdQO9Ufw?key=P2faPZEQ3e
   echo "Download dataset complete"
   echo "Unzip dataset"
-  #mkdir fsoco_dataset_yolov8
-  #unzip fsoco_dataset -d fsoco_dataset_yolov8
-  #rm -rf fsoco_dataset
+  mkdir fsoco_dataset_yolov8
+  unzip fsoco_dataset -d fsoco_dataset_yolov8
+  rm -rf fsoco_dataset
 
 fi
 
