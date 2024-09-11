@@ -10,18 +10,17 @@ La repository è così strutturata:
 - **FSOCO_yolov8_detect**: racchiude il training per l'identificazione dei coni con il dataset FSOCO e la rete yolov8;
 - **FSOCO_yolov8_segmentation**: racchiude il training per la segmentazione dei coni con il dataset FSOCO e la rete yolov8;
 - **FSOCO_yolov9_detect**: racchiude il training per l'identificazione dei coni con il dataset FSOCO e la rete yolov9;
-- **install.sh**: bash script che permette la creazione di un ambiente conda per il training e il testing dei modelli yolo;
-- **dataset_setting.png**: descrive come specificare il dataset utilizzato per il training della rete.
+- **install.sh**: bash script che permette la creazione dell'ambiente conda per il training e il testing dei modelli yolo;
 
 ## Priorità delle cartelle
 
 🟥 **FSOCO_yolov8_detect**: folder utilizzata in questo progetto;\
-🟨 **FSOCO_yolov8_segmentation**: folder sperimentale, utilizzata solo per eseguire delle prove;\
-🟩 **FSOCO_yolov9_detect**: folder sperimentale, utilizzata solo per confronto con la prima.
+🟨 **FSOCO_yolov8_segmentation**: folder sperimentale, utilizzata solo per eseguire delle prove (NON USATA);\
+🟩 **FSOCO_yolov9_detect**: folder sperimentale, utilizzata solo per confronto con la prima (NON USATA).
 
 ## Implementazione
+Dopo aver eseguito lo script di installazione, oltre alla creazione dell'ambiente conda, verrà scaricato anche il dataset FSOCO: all'interno della cartella si troveranno tutte le immagini opportunamente splittate in train, test, valid e il file **data.yaml** che contiene tutte le informazioni necessarie da passare al modello per iniziare il training.\
 La repository principale è **FSOCO_yolov8_detect** in quanto nel progetto si è deciso di effettuare l'identificazione dei coni tramite la rete yolov8: è stata inoltre eseguita una prova tramite la rete yolov9 non riscontrando però miglioramenti delle performance.\
-All'interno la repository presenta il file **data.yaml** che contiene tutte le informazioni necessarie da passare al modello per iniziare il training.\
 Nella cartella **script** sono presenti gli script python per il training e il testing del modello: i risultati vengono poi salvati, in maniera ordinata per modello e numero di epoche, all'interno della cartella **result_detect_train**.\
 Nella cartella **zed2** sono invece presenti gli script utili ad eseguire la cone detection direttamente con il modulo AI built-in della zed2 (è stato utilizzato come prova ma non fondamentale al fine del progetto).
 
@@ -47,4 +46,4 @@ In seguito eseguire lo script tramite il comando:
 ```bash
 bash install.sh
 ```
-Verrà chiesto un nome a piacere per la creazione dell'ambiente conda: una volta fornito verranno installate tutte le dipendenze necessarie per la creazione di un ambiente completo di training: verrà inoltre eseguito il download del dataset e salvato in un'apposita directory.
+Inizierà così la creazione dell'ambiente conda con tutte le dipendenze necessarie per il funzionamento: verrà inoltre eseguito il download del dataset e salvato in un'apposita directory.
