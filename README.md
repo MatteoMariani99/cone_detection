@@ -47,3 +47,7 @@ In seguito eseguire lo script tramite il comando:
 bash install.sh
 ```
 Inizierà così la creazione dell'ambiente conda con tutte le dipendenze necessarie per il funzionamento: verrà inoltre eseguito il download del dataset e salvato in un'apposita directory.
+Una volta fatto ciò, l'ambiente deve essere attivato tramite il comando:
+```bash
+conda activate yolov8
+```
