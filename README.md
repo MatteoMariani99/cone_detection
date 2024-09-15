@@ -14,9 +14,9 @@ La repository è così strutturata:
 
 ## Priorità delle cartelle
 
-🟥 **FSOCO_yolov8_detect**: folder utilizzata in questo progetto;\
-🟨 **FSOCO_yolov8_segmentation**: folder sperimentale, utilizzata solo per eseguire delle prove (NON USATA);\
-🟩 **FSOCO_yolov9_detect**: folder sperimentale, utilizzata solo per confronto con la prima (NON USATA).
+🟩 **FSOCO_yolov8_detect**: folder utilizzata in questo progetto;\
+🟥 **FSOCO_yolov8_segmentation**: folder sperimentale, utilizzata solo per eseguire delle prove (NON USATA);\
+🟥 **FSOCO_yolov9_detect**: folder sperimentale, utilizzata solo per confronto con la prima (NON USATA).
 
 ## Implementazione
 Dopo aver eseguito lo script di installazione, oltre alla creazione dell'ambiente conda, verrà scaricato anche il dataset FSOCO: all'interno della cartella si troveranno tutte le immagini opportunamente splittate in train, test, valid e il file **data.yaml** che contiene tutte le informazioni necessarie da passare al modello per iniziare il training.\
